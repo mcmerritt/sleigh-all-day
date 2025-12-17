@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🎄 Am I a developer yet? 🎄</title>
+<title>🎄 AM I A DEVELOPER YET 🎄</title>
 <style>
   body {
     background: #001f3f;
@@ -13,15 +13,15 @@
     overflow: hidden;
     height: 100vh;
   }
-  #tree {
-    display: inline-block;            /* shrink-wrap the tree */
+  #tree-container {
+    display: inline-block;
     text-align: center;
-    transform: scale(1.8);            /* make it bigger */
-    transform-origin: top center;     /* scale from the top */
-    margin: 0 auto;                   /* center horizontally */
+    transform: scale(1.8);
+    transform-origin: top center;
+    margin-bottom: 50px; /* ensures space below tree */
   }
   .tree-line {
-    font-size: 32px;                  /* bigger font for tree */
+    font-size: 32px; /* larger tree */
     line-height: 1.2;
   }
   .light {
@@ -31,6 +31,11 @@
     0% {opacity: 1;}
     50% {opacity: 0.2;}
     100% {opacity: 1;}
+  }
+  #holiday-text {
+    font-size: 40px; /* bigger text */
+    font-weight: bold;
+    margin-top: 0;
   }
   .snowflake {
     position: absolute;
@@ -44,8 +49,10 @@
 </head>
 <body>
 
-<div id="tree"></div>
-<h2>Go Birds 🦅💚 </h2>
+<div id="tree-container">
+  <div id="tree"></div>
+</div>
+<h2 id="holiday-text">Go Birds 🦅💚🦅</h2>
 
 <script>
 const treeLines = [
@@ -117,6 +124,12 @@ function createSnowflake() {
 
 // Continuously create snowflakes
 setInterval(createSnowflake, 200);
+
+// Alternate Go Birds text color between green and white
+const goBirds = document.getElementById("go-birds");
+setInterval(() => {
+  goBirds.style.color = goBirds.style.color === "green" ? "white" : "green";
+}, 800); // change every 0.8s
 
 growTree();
 setTimeout(twinkleLights, treeLines.length * 400 + 500);
