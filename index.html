@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🎄 Magical Christmas Tree with Snow 🎄</title>
+<title>🎄 Am I a developer yet? 🎄</title>
 <style>
   body {
     background: #001f3f;
@@ -13,8 +13,15 @@
     overflow: hidden;
     height: 100vh;
   }
+  #tree {
+    display: inline-block;            /* shrink-wrap the tree */
+    text-align: center;
+    transform: scale(1.8);            /* make it bigger */
+    transform-origin: top center;     /* scale from the top */
+    margin: 0 auto;                   /* center horizontally */
+  }
   .tree-line {
-    font-size: 24px;
+    font-size: 32px;                  /* bigger font for tree */
     line-height: 1.2;
   }
   .light {
@@ -38,10 +45,11 @@
 <body>
 
 <div id="tree"></div>
-<h2>Happy Holidays! ❄️🎅🎁</h2>
+<h2>Go Birds 🦅💚 </h2>
 
 <script>
 const treeLines = [
+  "       ⭐       ",  // Star at top
   "       *       ",
   "      ***      ",
   "     *🎄*     ",
