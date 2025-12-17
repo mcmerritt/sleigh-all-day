@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🎄AM I A DEVELOPER YET🎄 </title>
+<title>🎄AM I A DEVELOPER YET🎄</title>
 <style>
 body {
   background: #001f3f;
@@ -35,12 +35,12 @@ body {
 #holiday-text {
   font-size: 50px;
   font-weight: bold;
-  position: absolute; /* position independently */
-  left: 50%;
-  transform: translate(-50%, 100px); /* start below tree */
-  opacity: 0;
+  opacity: 0; /* start hidden */
+  transform: translateY(50px); /* start slightly below */
   transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
+  margin-top: 30px; /* space from tree */
 }
+
 .snowflake {
   position: absolute;
   top: -2%;
@@ -123,13 +123,11 @@ function createSnowflake() {
 setInterval(createSnowflake, 200);
 
 function showHolidayText() {
-  // Position text dynamically below tree
-  const treeRect = treeDiv.getBoundingClientRect();
-  holidayText.style.top = (treeRect.bottom + 10) + "px"; // 10px below tree
+  // reveal text with slide-up animation
   holidayText.style.opacity = 1;
-  holidayText.style.transform = "translate(-50%,0)";
+  holidayText.style.transform = "translateY(0)";
   
-  // Alternate color
+  // alternate colors
   setInterval(() => {
     holidayText.style.color = holidayText.style.color === "green" ? "white" : "green";
   }, 800);
