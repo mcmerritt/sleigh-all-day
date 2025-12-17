@@ -17,13 +17,11 @@ body {
 #tree-container {
   display: inline-block;
   text-align: center;
-  transform: scale(1.8);
-  transform-origin: top center;
   margin-bottom: 50px; /* space for text */
 }
 
 .tree-line {
-  font-size: 32px;
+  font-size: 48px; /* bigger tree by font size, no transform */
   line-height: 1.2;
 }
 
@@ -38,11 +36,10 @@ body {
 }
 
 #holiday-text {
-  font-size: 40px;
+  font-size: 50px; /* bigger text */
   font-weight: bold;
-  margin-top: 20px;
   opacity: 0; /* start hidden */
-  transform: translateY(50px); /* start below */
+  transform: translateY(100px); /* start well below */
   transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
 }
 
