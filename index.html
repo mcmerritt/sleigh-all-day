@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🎄 Magical Christmas Tree with Snow 🎄</title>
+<style>
+  body {
+    background: #001f3f;
+    color: white;
+    font-family: monospace;
+    text-align: center;
+    padding-top: 50px;
+    overflow: hidden;
+    height: 100vh;
+  }
+  .tree-line {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .light {
+    animation: blink 1.2s infinite alternate;
+  }
+  @keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0.2;}
+    100% {opacity: 1;}
+  }
+  .snowflake {
+    position: absolute;
+    top: -2%;
+    font-size: 20px;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="tree"></div>
+<h2>Happy Holidays! ❄️🎅🎁</h2>
+
+<script>
+const treeLines = [
+  "       *       ",
+  "      ***      ",
+  "     *🎄*     ",
+  "    *****    ",
+  "   *✨✨*   ",
+  "  *******  ",
+  " *🎁✨🎁* ",
+  "*********"
+];
+
+const treeDiv = document.getElementById("tree");
+
+// Add blinking lights to emojis
+function addLights(line) {
+  return line.replace(/✨|🎄|🎁/g, match => `<span class="light">${match}</span>`);
+}
+
+// Grow the tree line by line
+let index = 0;
+function growTree() {
+  if(index < treeLines.length){
+    const lineDiv = document.createElement("div");
+    lineDiv.classList.add("tree-line");
+    lineDiv.innerHTML = addLights(treeLines[index]);
+    treeDiv.appendChild(lineDiv);
+    index++;
+    setTimeout(growTree, 400);
+  }
+}
+
+// Twinkle lights randomly
+function twinkleLights() {
+  const lights = document.querySelectorAll(".light");
+  setInterval(() => {
+    lights.forEach(light => {
+      if(Math.random() > 0.5) light.style.opacity = Math.random();
+    });
+  }, 300);
+}
+
+// Snowflake animation
+function createSnowflake() {
+  const snowflake = document.createElement("div");
+  snowflake.classList.add("snowflake");
+  snowflake.textContent = "❄";
+  snowflake.style.left = Math.random() * window.innerWidth + "px";
+  snowflake.style.fontSize = (10 + Math.random() * 20) + "px";
+  document.body.appendChild(snowflake);
+
+  let fall = 0;
+  const speed = 1 + Math.random() * 3;
+  const sway = Math.random() * 2;
+  function animate() {
+    fall += speed;
+    snowflake.style.top = fall + "px";
+    snowflake.style.left = parseFloat(snowflake.style.left) + Math.sin(fall * 0.05) * sway + "px";
+    if(fall < window.innerHeight) {
+      requestAnimationFrame(animate);
+    } else {
+      snowflake.remove();
+    }
+  }
+  animate();
+}
+
+// Continuously create snowflakes
+setInterval(createSnowflake, 200);
+
+growTree();
+setTimeout(twinkleLights, treeLines.length * 400 + 500);
+</script>
+
+</body>
+</html>
