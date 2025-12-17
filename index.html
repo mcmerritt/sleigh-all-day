@@ -4,47 +4,56 @@
 <meta charset="UTF-8">
 <title>🎄 AM I A DEVELOPER YET 🎄</title>
 <style>
-  body {
-    background: #001f3f;
-    color: white;
-    font-family: monospace;
-    text-align: center;
-    padding-top: 50px;
-    overflow: hidden;
-    height: 100vh;
-  }
-  #tree-container {
-    display: inline-block;
-    text-align: center;
-    transform: scale(1.8);
-    transform-origin: top center;
-    margin-bottom: 50px; /* ensures space below tree */
-  }
-  .tree-line {
-    font-size: 32px; /* larger tree */
-    line-height: 1.2;
-  }
-  .light {
-    animation: blink 1.2s infinite alternate;
-  }
-  @keyframes blink {
-    0% {opacity: 1;}
-    50% {opacity: 0.2;}
-    100% {opacity: 1;}
-  }
-  #holiday-text {
-    font-size: 40px; /* bigger text */
-    font-weight: bold;
-    margin-top: 0;
-  }
-  .snowflake {
-    position: absolute;
-    top: -2%;
-    font-size: 20px;
-    color: white;
-    user-select: none;
-    pointer-events: none;
-  }
+body {
+  background: #001f3f;
+  color: white;
+  font-family: monospace;
+  text-align: center;
+  padding-top: 50px;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#tree-container {
+  display: inline-block;
+  text-align: center;
+  transform: scale(1.8);
+  transform-origin: top center;
+  margin-bottom: 50px; /* space for text */
+}
+
+.tree-line {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.light {
+  animation: blink 1.2s infinite alternate;
+}
+
+@keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: 0.2;}
+  100% {opacity: 1;}
+}
+
+#holiday-text {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 20px;
+  opacity: 0; /* start hidden */
+  transform: translateY(50px); /* start below */
+  transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
+}
+
+.snowflake {
+  position: absolute;
+  top: -2%;
+  font-size: 20px;
+  color: white;
+  user-select: none;
+  pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -52,11 +61,12 @@
 <div id="tree-container">
   <div id="tree"></div>
 </div>
+
 <h2 id="holiday-text">Go Birds 🦅💚🦅</h2>
 
 <script>
 const treeLines = [
-  "       ⭐       ",  // Star at top
+  "       ⭐       ",
   "       *       ",
   "      ***      ",
   "     *🎄*     ",
@@ -68,6 +78,7 @@ const treeLines = [
 ];
 
 const treeDiv = document.getElementById("tree");
+const holidayText = document.getElementById("holiday-text");
 
 // Add blinking lights to emojis
 function addLights(line) {
@@ -84,6 +95,8 @@ function growTree() {
     treeDiv.appendChild(lineDiv);
     index++;
     setTimeout(growTree, 400);
+  } else {
+    showHolidayText(); // animate text after tree
   }
 }
 
@@ -125,12 +138,16 @@ function createSnowflake() {
 // Continuously create snowflakes
 setInterval(createSnowflake, 200);
 
-// Alternate Go Birds text color between green and white
-const goBirds = document.getElementById("go-birds");
-setInterval(() => {
-  goBirds.style.color = goBirds.style.color === "green" ? "white" : "green";
-}, 800); // change every 0.8s
+// Animate “Go Birds” text from bottom and alternate color
+function showHolidayText() {
+  holidayText.style.opacity = 1;
+  holidayText.style.transform = "translateY(0)"; // slide up
+  setInterval(() => {
+    holidayText.style.color = holidayText.style.color === "green" ? "white" : "green";
+  }, 800);
+}
 
+// Start tree animation and lights
 growTree();
 setTimeout(twinkleLights, treeLines.length * 400 + 500);
 </script>
