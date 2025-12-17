@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🎄 AM I A DEVELOPER YET 🎄</title>
+<title>Go Birds Tree</title>
 <style>
 body {
   background: #001f3f;
   color: white;
   font-family: monospace;
   text-align: center;
-  padding-top: 50px;
   overflow: hidden;
-  height: 100vh;
+  padding-top: 50px;
 }
 
-#tree-container {
+#tree {
   display: inline-block;
-  text-align: center;
-  margin-bottom: 50px; /* space for text */
 }
 
 .tree-line {
-  font-size: 48px; /* bigger tree by font size, no transform */
+  font-size: 48px;
   line-height: 1.2;
 }
 
@@ -36,13 +33,14 @@ body {
 }
 
 #holiday-text {
-  font-size: 50px; /* bigger text */
+  font-size: 50px;
   font-weight: bold;
-  opacity: 0; /* start hidden */
-  transform: translateY(100px); /* start well below */
+  position: absolute; /* position independently */
+  left: 50%;
+  transform: translate(-50%, 100px); /* start below tree */
+  opacity: 0;
   transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
 }
-
 .snowflake {
   position: absolute;
   top: -2%;
@@ -55,10 +53,7 @@ body {
 </head>
 <body>
 
-<div id="tree-container">
-  <div id="tree"></div>
-</div>
-
+<div id="tree"></div>
 <h2 id="holiday-text">Go Birds 🦅💚🦅</h2>
 
 <script>
@@ -77,12 +72,10 @@ const treeLines = [
 const treeDiv = document.getElementById("tree");
 const holidayText = document.getElementById("holiday-text");
 
-// Add blinking lights to emojis
 function addLights(line) {
   return line.replace(/✨|🎄|🎁/g, match => `<span class="light">${match}</span>`);
 }
 
-// Grow the tree line by line
 let index = 0;
 function growTree() {
   if(index < treeLines.length){
@@ -93,11 +86,10 @@ function growTree() {
     index++;
     setTimeout(growTree, 400);
   } else {
-    showHolidayText(); // animate text after tree
+    showHolidayText();
   }
 }
 
-// Twinkle lights randomly
 function twinkleLights() {
   const lights = document.querySelectorAll(".light");
   setInterval(() => {
@@ -107,7 +99,6 @@ function twinkleLights() {
   }, 300);
 }
 
-// Snowflake animation
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
@@ -123,28 +114,27 @@ function createSnowflake() {
     fall += speed;
     snowflake.style.top = fall + "px";
     snowflake.style.left = parseFloat(snowflake.style.left) + Math.sin(fall * 0.05) * sway + "px";
-    if(fall < window.innerHeight) {
-      requestAnimationFrame(animate);
-    } else {
-      snowflake.remove();
-    }
+    if(fall < window.innerHeight) requestAnimationFrame(animate);
+    else snowflake.remove();
   }
   animate();
 }
 
-// Continuously create snowflakes
 setInterval(createSnowflake, 200);
 
-// Animate “Go Birds” text from bottom and alternate color
 function showHolidayText() {
+  // Position text dynamically below tree
+  const treeRect = treeDiv.getBoundingClientRect();
+  holidayText.style.top = (treeRect.bottom + 10) + "px"; // 10px below tree
   holidayText.style.opacity = 1;
-  holidayText.style.transform = "translateY(0)"; // slide up
+  holidayText.style.transform = "translate(-50%,0)";
+  
+  // Alternate color
   setInterval(() => {
     holidayText.style.color = holidayText.style.color === "green" ? "white" : "green";
   }, 800);
 }
 
-// Start tree animation and lights
 growTree();
 setTimeout(twinkleLights, treeLines.length * 400 + 500);
 </script>
