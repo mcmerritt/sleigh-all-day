@@ -50,6 +50,21 @@ body {
   pointer-events: none;
 }
 </style>
+  #santa-hat {
+  position: absolute;
+  font-size: 40px;
+  animation: jiggle 1.5s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes jiggle {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-5deg); }
+  50%  { transform: rotate(5deg); }
+  75%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
 </head>
 <body>
 
@@ -58,7 +73,7 @@ body {
 
 <script>
 const treeLines = [
-  "       ⭐       ",
+"       <span id='star'>⭐</span>       ",
   "       *       ",
   "      ***      ",
   "     *🎄*     ",
@@ -68,6 +83,20 @@ const treeLines = [
   " *🎁✨🎁* ",
   "*********"
 ];
+  function addSantaHat() {
+  const star = document.getElementById("star");
+  if (!star) return;
+
+  const hat = document.createElement("div");
+  hat.id = "santa-hat";
+  hat.textContent = "🎅";
+
+  document.body.appendChild(hat);
+
+  const starRect = star.getBoundingClientRect();
+  hat.style.left = starRect.left + starRect.width / 2 - 20 + "px";
+  hat.style.top = starRect.top - 30 + "px";
+}
 
 const treeDiv = document.getElementById("tree");
 const holidayText = document.getElementById("holiday-text");
@@ -86,6 +115,7 @@ function growTree() {
     index++;
     setTimeout(growTree, 400);
   } else {
+    addSantaHat();
     showHolidayText();
   }
 }
