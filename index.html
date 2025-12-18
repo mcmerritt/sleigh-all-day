@@ -216,10 +216,10 @@ function addSantaHat() {
     // Click hint
     const hint = document.createElement("div");
     hint.id = "click-hint";
-    hint.textContent = "👆 Click me!";
+    hint.textContent = "Click me 👀";
     document.body.appendChild(hint);
-    hint.style.left = starRect.left + starRect.width / 2 + "px";
-    hint.style.top = starRect.top - 40 + "px";
+    hint.style.left = starRect.right + 5 "px";
+    hint.style.top = starRect.top + "px";
 
     function dropHat() {
       if (hat.classList.contains("falling")) return;
