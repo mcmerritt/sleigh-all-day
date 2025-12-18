@@ -6,6 +6,11 @@
 <style>
   #star {
   cursor: pointer;
+  display: inline-block;
+  user-select: none;
+  pointer-events: auto;
+  position: relative;
+  z-index: 20;
 }
 
 body {
@@ -68,6 +73,8 @@ body {
 
 #tree {
   display: inline-block;
+  position: relative;
+  z-index: 10;
 }
 
 .tree-line {
