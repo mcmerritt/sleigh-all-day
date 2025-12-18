@@ -4,140 +4,109 @@
 <meta charset="UTF-8">
 <title>🎄AM I A DEVELOPER YET🎄</title>
 <style>
-  #star {
-  cursor: pointer;
-  display: inline-block;
-  user-select: none;
-  pointer-events: auto;
-  position: relative;
-  z-index: 20;
-}
-
-body {
-  background: #001f3f;
-  color: white;
-  font-family: monospace;
-  text-align: center;
-  overflow: hidden;
-  padding-top: 50px;
-}
-
-#tree {
-  display: inline-block;
-}
-
-.tree-line {
-  font-size: 48px;
-  line-height: 1.2;
-}
-
-.light {
-  animation: blink 1.2s infinite alternate;
-}
-
-@keyframes blink {
-  0% {opacity: 1;}
-  50% {opacity: 0.2;}
-  100% {opacity: 1;}
-}
-
-.falling {
-  animation: fallOff 1.2s ease-in forwards;
-}
-
-#holiday-text {
-  font-size: 50px;
-  font-weight: bold;
-  opacity: 0; /* start hidden */
-  transform: translateY(50px); /* start slightly below */
-  transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
-  margin-top: 30px; /* space from tree */
-}
-
-.snowflake {
-  position: absolute;
-  top: -2%;
-  font-size: 20px;
-  color: white;
-  user-select: none;
-  pointer-events: none;
-}
-body {
-  background: #001f3f;
-  color: white;
-  font-family: monospace;
-  text-align: center;
-  overflow: hidden;
-  padding-top: 50px;
-}
-
-#tree {
-  display: inline-block;
-  position: relative;
-  z-index: 10;
-}
-
-.tree-line {
-  font-size: 48px;
-  line-height: 1.2;
-}
-
-.light {
-  animation: blink 1.2s infinite alternate;
-}
-
-@keyframes blink {
-  0% {opacity: 1;}
-  50% {opacity: 0.2;}
-  100% {opacity: 1;}
-}
-
-#holiday-text {
-  font-size: 50px;
-  font-weight: bold;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
-  margin-top: 30px;
-}
-
-.snowflake {
-  position: absolute;
-  top: -2%;
-  font-size: 20px;
-  color: white;
-  user-select: none;
-  pointer-events: none;
-}
-
-#santa-hat {
-  position: absolute;
-  font-size: 40px;
-  transform-origin: bottom center;
-}
-
-.jiggle {
-  animation: jiggle 1.5s infinite ease-in-out;
-}
-
-@keyframes jiggle {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(-5deg); }
-  50%  { transform: rotate(5deg); }
-  75%  { transform: rotate(-3deg); }
-  100% { transform: rotate(0deg); }
-}
-  
-    @keyframes fallOff {
-  0% {
-    transform: rotate(0deg) translateY(0);
-    opacity: 1;
+  body {
+    background: #001f3f;
+    color: white;
+    font-family: monospace;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 50px;
   }
-  100% {
-    transform: rotate(720deg) translateY(600px);
+
+  #tree {
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+  }
+
+  .tree-line {
+    font-size: 48px;
+    line-height: 1.2;
+  }
+
+  .light {
+    animation: blink 1.2s infinite alternate;
+  }
+
+  @keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0.2;}
+    100% {opacity: 1;}
+  }
+
+  #holiday-text {
+    font-size: 50px;
+    font-weight: bold;
     opacity: 0;
+    transform: translateY(50px);
+    transition: transform 1s ease, opacity 1s ease, color 0.8s ease;
+    margin-top: 30px;
   }
-}
+
+  .snowflake {
+    position: absolute;
+    top: -2%;
+    font-size: 20px;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  #star {
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+    position: relative;
+    z-index: 20;
+  }
+
+  .santa-hat {
+    position: absolute;
+    font-size: 40px;
+    transform-origin: bottom center;
+    z-index: 30;
+  }
+
+  .jiggle {
+    animation: jiggle 1.5s infinite ease-in-out;
+  }
+
+  @keyframes jiggle {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(-5deg); }
+    50%  { transform: rotate(5deg); }
+    75%  { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  .falling {
+    animation: fallOff 1.2s ease-in forwards;
+  }
+
+  @keyframes fallOff {
+    0% {
+      transform: rotate(0deg) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(720deg) translateY(600px);
+      opacity: 0;
+    }
+  }
+
+  #click-hint {
+    position: absolute;
+    font-size: 16px;
+    color: yellow;
+    animation: bounce 1s infinite alternate;
+    pointer-events: none;
+    z-index: 40;
+  }
+
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
 </style>
 </head>
 <body>
@@ -147,7 +116,7 @@ body {
 
 <script>
 const treeLines = [
-"       <span id='star' title='click me 👀'>⭐</span>       ",
+  "       <span id='star' title='click me 👀'>⭐</span>       ",
   "       *       ",
   "      ***      ",
   "     *🎄*     ",
@@ -157,46 +126,16 @@ const treeLines = [
   " *🎁✨🎁* ",
   "*********"
 ];
-function addSantaHat() {
-  const star = document.getElementById("star");
-  if (!star) return;
-
-  function spawnHat() {
-    const hat = document.createElement("div");
-    hat.id = "santa-hat";
-    hat.textContent = "🎅";
-    hat.classList.add("jiggle");
-
-    document.body.appendChild(hat);
-
-    const starRect = star.getBoundingClientRect();
-    hat.style.left = starRect.left + starRect.width / 2 - 20 + "px";
-    hat.style.top = starRect.top - 30 + "px";
-
-    star.addEventListener("click", () => {
-      if (hat.classList.contains("falling")) return;
-
-      hat.classList.remove("jiggle");
-      hat.classList.add("falling");
-
-      // ⬇️ when fall animation ends, reset
-      hat.addEventListener("animationend", () => {
-        hat.remove();
-        setTimeout(spawnHat, 500); // small pause before reappearing
-      }, { once: true });
-    });
-  }
-
-  spawnHat();
-}
 
 const treeDiv = document.getElementById("tree");
 const holidayText = document.getElementById("holiday-text");
 
+// Add blinking lights
 function addLights(line) {
   return line.replace(/✨|🎄|🎁/g, match => `<span class="light">${match}</span>`);
 }
 
+// Grow tree line by line
 let index = 0;
 function growTree() {
   if(index < treeLines.length){
@@ -212,6 +151,7 @@ function growTree() {
   }
 }
 
+// Twinkle lights
 function twinkleLights() {
   const lights = document.querySelectorAll(".light");
   setInterval(() => {
@@ -221,13 +161,11 @@ function twinkleLights() {
   }, 300);
 }
 
+// Falling snow and eagles
 function createFallingThing() {
   const thing = document.createElement("div");
   thing.classList.add("snowflake");
-
-  // 70% snow, 30% eagle
   thing.textContent = Math.random() < 0.7 ? "❄️" : "🦅";
-
   thing.style.left = Math.random() * window.innerWidth + "px";
   thing.style.fontSize = (16 + Math.random() * 24) + "px";
   document.body.appendChild(thing);
@@ -239,31 +177,66 @@ function createFallingThing() {
   function animate() {
     fall += speed;
     thing.style.top = fall + "px";
-    thing.style.left =
-      parseFloat(thing.style.left) + Math.sin(fall * 0.05) * sway + "px";
+    thing.style.left = parseFloat(thing.style.left) + Math.sin(fall * 0.05) * sway + "px";
 
-    if (fall < window.innerHeight) {
-      requestAnimationFrame(animate);
-    } else {
-      thing.remove();
-    }
+    if (fall < window.innerHeight) requestAnimationFrame(animate);
+    else thing.remove();
   }
 
   animate();
-
 }
 
 setInterval(createFallingThing, 220);
 
+// Holiday text animation
 function showHolidayText() {
-  // reveal text with slide-up animation
   holidayText.style.opacity = 1;
   holidayText.style.transform = "translateY(0)";
-  
-  // alternate colors
   setInterval(() => {
     holidayText.style.color = holidayText.style.color === "green" ? "white" : "green";
   }, 800);
+}
+
+// Santa hat spawn and click interaction
+function addSantaHat() {
+  const star = document.getElementById("star");
+  if (!star) return;
+
+  function spawnHat() {
+    const hat = document.createElement("div");
+    hat.classList.add("santa-hat", "jiggle");
+    hat.textContent = "🎅";
+    document.body.appendChild(hat);
+
+    // Position hat above the star
+    const starRect = star.getBoundingClientRect();
+    hat.style.left = starRect.left + starRect.width / 2 - 20 + "px";
+    hat.style.top = starRect.top - 30 + "px";
+
+    // Click hint
+    const hint = document.createElement("div");
+    hint.id = "click-hint";
+    hint.textContent = "👆 Click me!";
+    document.body.appendChild(hint);
+    hint.style.left = starRect.left + starRect.width / 2 + "px";
+    hint.style.top = starRect.top - 40 + "px";
+
+    function dropHat() {
+      if (hat.classList.contains("falling")) return;
+      hat.classList.remove("jiggle");
+      hat.classList.add("falling");
+      hint.remove();
+
+      hat.addEventListener("animationend", () => {
+        hat.remove();
+        setTimeout(spawnHat, 500); // respawn
+      }, { once: true });
+    }
+
+    star.addEventListener("click", dropHat, { once: true });
+  }
+
+  spawnHat();
 }
 
 growTree();
