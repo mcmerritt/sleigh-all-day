@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <title>🎄AM I A DEVELOPER YET🎄</title>
 <style>
+  #star {
+  cursor: pointer;
+}
+
 body {
   background: #001f3f;
   color: white;
@@ -30,6 +34,10 @@ body {
   0% {opacity: 1;}
   50% {opacity: 0.2;}
   100% {opacity: 1;}
+}
+
+.falling {
+  animation: fallOff 1.2s ease-in forwards;
 }
 
 #holiday-text {
@@ -95,7 +103,6 @@ body {
   pointer-events: none;
 }
 
-/* ✅ SANTA HAT CSS MUST BE HERE */
 #santa-hat {
   position: absolute;
   font-size: 40px;
@@ -109,6 +116,16 @@ body {
   50%  { transform: rotate(5deg); }
   75%  { transform: rotate(-3deg); }
   100% { transform: rotate(0deg); }
+}
+    @keyframes fallOff {
+  0% {
+    transform: rotate(0deg) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(720deg) translateY(600px);
+    opacity: 0;
+  }
 }
 </style>
 </head>
@@ -129,7 +146,7 @@ const treeLines = [
   " *🎁✨🎁* ",
   "*********"
 ];
-  function addSantaHat() {
+function addSantaHat() {
   const star = document.getElementById("star");
   if (!star) return;
 
@@ -142,6 +159,16 @@ const treeLines = [
   const starRect = star.getBoundingClientRect();
   hat.style.left = starRect.left + starRect.width / 2 - 20 + "px";
   hat.style.top = starRect.top - 30 + "px";
+
+  let fallen = false;
+
+  star.addEventListener("click", () => {
+    if (fallen) return;
+    fallen = true;
+
+    hat.classList.remove("jiggle");
+    hat.classList.add("falling");
+  });
 }
 
 const treeDiv = document.getElementById("tree");
