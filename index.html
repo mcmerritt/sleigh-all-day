@@ -113,11 +113,11 @@ body {
 #santa-hat {
   position: absolute;
   font-size: 40px;
-  animation: jiggle 1.5s infinite ease-in-out;
   transform-origin: bottom center;
 }
 
 @keyframes jiggle {
+  animation: jiggle 1.5s infinite ease-in-out;
   0%   { transform: rotate(0deg); }
   25%  { transform: rotate(-5deg); }
   50%  { transform: rotate(5deg); }
@@ -160,6 +160,7 @@ function addSantaHat() {
   const hat = document.createElement("div");
   hat.id = "santa-hat";
   hat.textContent = "🎅";
+  hat.classList.add("jiggle");
 
   document.body.appendChild(hat);
 
