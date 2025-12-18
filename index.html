@@ -147,7 +147,7 @@ body {
 
 <script>
 const treeLines = [
-"       <span id='star'>⭐</span>       ",
+"       <span id='star' title='click me 👀'>⭐</span>       ",
   "       *       ",
   "      ***      ",
   "     *🎄*     ",
@@ -161,26 +161,33 @@ function addSantaHat() {
   const star = document.getElementById("star");
   if (!star) return;
 
-  const hat = document.createElement("div");
-  hat.id = "santa-hat";
-  hat.textContent = "🎅";
-  hat.classList.add("jiggle");
+  function spawnHat() {
+    const hat = document.createElement("div");
+    hat.id = "santa-hat";
+    hat.textContent = "🎅";
+    hat.classList.add("jiggle");
 
-  document.body.appendChild(hat);
+    document.body.appendChild(hat);
 
-  const starRect = star.getBoundingClientRect();
-  hat.style.left = starRect.left + starRect.width / 2 - 20 + "px";
-  hat.style.top = starRect.top - 30 + "px";
+    const starRect = star.getBoundingClientRect();
+    hat.style.left = starRect.left + starRect.width / 2 - 20 + "px";
+    hat.style.top = starRect.top - 30 + "px";
 
-  let fallen = false;
+    star.addEventListener("click", () => {
+      if (hat.classList.contains("falling")) return;
 
-  star.addEventListener("click", () => {
-    if (fallen) return;
-    fallen = true;
+      hat.classList.remove("jiggle");
+      hat.classList.add("falling");
 
-    hat.classList.remove("jiggle");
-    hat.classList.add("falling");
-  });
+      // ⬇️ when fall animation ends, reset
+      hat.addEventListener("animationend", () => {
+        hat.remove();
+        setTimeout(spawnHat, 500); // small pause before reappearing
+      }, { once: true });
+    });
+  }
+
+  spawnHat();
 }
 
 const treeDiv = document.getElementById("tree");
