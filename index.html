@@ -99,28 +99,39 @@ function twinkleLights() {
   }, 300);
 }
 
-function createSnowflake() {
-  const snowflake = document.createElement("div");
-  snowflake.classList.add("snowflake");
-  snowflake.textContent = "❄";
-  snowflake.style.left = Math.random() * window.innerWidth + "px";
-  snowflake.style.fontSize = (10 + Math.random() * 20) + "px";
-  document.body.appendChild(snowflake);
+function createFallingThing() {
+  const thing = document.createElement("div");
+  thing.classList.add("snowflake");
 
-  let fall = 0;
+  // 70% snow, 30% eagle
+  thing.textContent = Math.random() < 0.7 ? "❄️" : "🦅";
+
+  thing.style.left = Math.random() * window.innerWidth + "px";
+  thing.style.fontSize = (16 + Math.random() * 24) + "px";
+  document.body.appendChild(thing);
+
+  let fall = -50;
   const speed = 1 + Math.random() * 3;
   const sway = Math.random() * 2;
+
   function animate() {
     fall += speed;
-    snowflake.style.top = fall + "px";
-    snowflake.style.left = parseFloat(snowflake.style.left) + Math.sin(fall * 0.05) * sway + "px";
-    if(fall < window.innerHeight) requestAnimationFrame(animate);
-    else snowflake.remove();
+    thing.style.top = fall + "px";
+    thing.style.left =
+      parseFloat(thing.style.left) + Math.sin(fall * 0.05) * sway + "px";
+
+    if (fall < window.innerHeight) {
+      requestAnimationFrame(animate);
+    } else {
+      thing.remove();
+    }
   }
+
   animate();
+
 }
 
-setInterval(createSnowflake, 200);
+setInterval(createFallingThing, 220);
 
 function showHolidayText() {
   // reveal text with slide-up animation
